@@ -2,7 +2,7 @@ import {
   proxy,
   redirect,
   serve,
-  serveStaticAssets
+  serveStaticAssets,
 } from "https://deno.land/x/sift@0.1.0/mod.js";
 import NotFound from "./pages/404.jsx";
 import Home from "./pages/home.jsx";
@@ -30,6 +30,5 @@ serve({
   "/(iocp-links|iocp-links.html)": redirect("/iocp_links"),
   "/math/index.html": redirect("/math"),
   // Proxies
-  "/visual/:splat.jpg": proxy("tinyclouds.org"),
-  "/colorize/val-imgs/(.*)": proxy("tinyclouds.org")
+  "/colorize/val-imgs/(.*)": proxy("tinyclouds.org"),
 });
