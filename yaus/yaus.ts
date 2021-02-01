@@ -1,10 +1,10 @@
-import { serve, json } from "https://deno.land/x/sift@0.1.2/mod.ts";
+import { json, serve } from "https://deno.land/x/sift@0.1.2/mod.ts";
 import { nanoid } from "https://cdn.esm.sh/v14/nanoid@3.1.20/esnext/nanoid.js";
-import { findCode, findUrl, add } from "./db.ts";
+import { add, findCode, findUrl } from "./db.ts";
 
 serve({
   "/:code": handleCodeReqs,
-  "/api/create": handleCreate
+  "/api/create": handleCreate,
 });
 
 async function handleCreate(request: Request) {
@@ -25,10 +25,9 @@ async function handleCreate(request: Request) {
 
 async function handleCodeReqs(
   _req: Request,
-  params?: { [key: string]: string }
+  params?: { [key: string]: string },
 ) {
-  const { code = "" } = params as any;
-  console.log(params);
+  const { code = "" } = params as { code: string };
 
   if (code) {
     const url = await findUrl(code);
