@@ -1,9 +1,4 @@
-import {
-  proxy,
-  redirect,
-  serve,
-  serveStaticAssets,
-} from "https://deno.land/x/sift@0.1.0/mod.js";
+import { serve, serveStatic } from "https://deno.land/x/sift@0.1.5/mod.ts";
 import NotFound from "./pages/404.jsx";
 import Home from "./pages/home.jsx";
 import OptimisticNihilism from "./pages/optimistic_nihilism.jsx";
@@ -23,12 +18,16 @@ serve({
   "/iocp_links": IocpLinks,
   "/math": MathPage,
   "/visual": Visual,
-  "/static/(.*)": serveStaticAssets(import.meta.url),
-  404: NotFound,
+  "/static/:filename+": serveStatic("static", { baseUrl: import.meta.url }),
   // Redirects
-  "/rant.html": redirect("/rant"),
-  "/(iocp-links|iocp-links.html)": redirect("/iocp_links"),
-  "/math/index.html": redirect("/math"),
+  "/rant.html": () => Response.redirect("/rant", 301),
+  "/(iocp-links|iocp-links.html)": () => Response.redirect("/iocp_links", 301),
+  "/math/index.html": () => Response.redirect("/math", 301),
   // Proxies
-  "/colorize/val-imgs/(.*)": proxy("tinyclouds.org"),
+  "/colorize/val-imgs/(.*)": (request, params) =>
+    fetch(
+      new URL(params["0"] ?? "", "https://tinyclouds.org/colorize/val-imgs"),
+      request,
+    ),
+  404: NotFound,
 });
