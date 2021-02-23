@@ -42,21 +42,17 @@ export default function Residency(request) {
         <h1>Google Brain Residency</h1>
 
         <p>
-          Last year, after{" "}
-          <a href="http://tinyclouds.org/colorize/">nerding</a>
+          Last year, after <a href="http://tinyclouds.org/colorize/">nerding</a>
           {" "}
-          <a href="https://github.com/ry/tensorflow-vgg16">out</a>
-          {" "}
+          <a href="https://github.com/ry/tensorflow-vgg16">out</a>{" "}
           <a
             href="https://github.com/tensorflow/tensorflow/commit/555c7f7c4108ae91601dce2e2dea1ad1158d5977"
           >
             a
-          </a>
-          {" "}
-          <a href="https://github.com/ry/tensorflow-resnet">bit</a>
-          {" "}
+          </a>{" "}
+          <a href="https://github.com/ry/tensorflow-resnet">bit</a>{" "}
           on TensorFlow, I applied and was accepted into the inaugural class of
-          the {" "}
+          the{"  "}
           <a href="https://research.google.com/teams/brain/residency/">
             Google Brain Residency Program
           </a>. The program invites two dozen people, with varying backgrounds
@@ -86,7 +82,8 @@ export default function Residency(request) {
 
         <p>
           Armed with little more than this goal, I uprooted myself from Brooklyn
-          and moved, <a href="http://nodejs.org/">
+          and moved,{" "}
+          <a href="http://nodejs.org/">
             yet again
           </a>, to the Bay Area in pursuit of technology. I was soon spending my
           days chatting with ML researchers and viming around Google's vast
@@ -94,7 +91,8 @@ export default function Residency(request) {
         </p>
 
         <p>
-          If you want to skip the technical bits, <a
+          If you want to skip the technical bits,{" "}
+          <a
             href="#conclusion"
           >
             jump to the conclusion
@@ -107,29 +105,28 @@ export default function Residency(request) {
           As everyone knows,{" "}
           <a href="http://i.imgur.com/i42A2.jpg">
             the zoom technology presented in CSI
-          </a>
-          {" "}
+          </a>{" "}
           is impossible. You cannot arbitrarily zoom into photos. However, it is
-          possible to present <i>plausible hallucinations</i>
-          {" "}
+          possible to present <i>plausible hallucinations</i>{" "}
           of what it would look like if you enlarged the image. Being able to
           crisply increase the resolution of photographs would be a step towards
           my demo.
         </p>
 
         <p>
-          In the literature this problem is called <i>
+          In the literature this problem is called{" "}
+          <i>
             Super Resolution
           </i>, and it has a long history of attempts.
         </p>
 
         <p>
-          Approaching this, we knew that using a <a
+          Approaching this, we knew that using a{" "}
+          <a
             href="http://cs231n.github.io/convolutional-networks/"
           >
             ConvNet
-          </a>
-          {" "}
+          </a>{" "}
           with input the low-resolution image and output the high-resolution
           image trained to minimize per-pixel distance (L2) would not completely
           solve the problem. This kind of loss function learns to output the
@@ -147,11 +144,11 @@ export default function Residency(request) {
             href="https://en.wikipedia.org/wiki/Generative_adversarial_networks"
           >
             GAN
-          </a>
-          {" "}
+          </a>{" "}
           seemed like it could solve this problem, but having made several
           failed attempts at building GANs before, we turned to another
-          promising new generative model called <a
+          promising new generative model called{" "}
+          <a
             href="https://arxiv.org/abs/1606.05328"
           >
             PixelCNN
@@ -165,14 +162,11 @@ export default function Residency(request) {
           recurrent networks like{" "}
           <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">
             LSTMs
-          </a>
-          {" "}
-          have been <a href="https://arxiv.org/abs/1409.3215">very</a>
-          {" "}
+          </a>{" "}
+          have been <a href="https://arxiv.org/abs/1409.3215">very</a>{" "}
           <a href="https://research.google.com/pubs/pub45610.html">
             successful
-          </a>
-          {" "}
+          </a>{" "}
           at generating sequences&mdash;usually words or characters. PixelCNN
           cleverly structures a CNN to produce exact probability distributions
           of pixels conditioned on previous ones. It's a mixture between an RNN
@@ -180,7 +174,9 @@ export default function Residency(request) {
         </p>
 
         <img src="/static/residency/pixelcnn.png" />
-        <center><small>Figure by van den Oord et al.</small></center>
+        <center>
+          <small>Figure by van den Oord et al.</small>
+        </center>
 
         <p>
           Surprisingly PixelCNNs generate very natural looking images. Unlike
@@ -264,7 +260,8 @@ export default function Residency(request) {
         </p>
 
         <p>
-          The result was this paper: <a href="https://arxiv.org/abs/1702.00783">
+          The result was this paper:{" "}
+          <a href="https://arxiv.org/abs/1702.00783">
             Pixel Recursive Super Resolution
           </a>
         </p>
@@ -272,7 +269,9 @@ export default function Residency(request) {
         <h2>PixColor: Another Attempt at Colorization</h2>
 
         <img src="/static/residency/multimodal4.jpg" />
-        <center><small>Two color modes outputted by PixColor.</small></center>
+        <center>
+          <small>Two color modes outputted by PixColor.</small>
+        </center>
 
         <p>
           <a href="https://research.google.com/pubs/105009.html">
@@ -285,15 +284,14 @@ export default function Residency(request) {
           </a>, had also been toying around with image colorization. He told me
           about an experiment where he took a <code>224&times;224&times;3</code>
           {" "}
-          image in <a
+          image in{" "}
+          <a
             href="https://en.wikipedia.org/wiki/YPbPr"
           >
             YPbPr colorspace
-          </a>
-          {" "}
+          </a>{" "}
           (where the grayscale and colors are split), scaled the color channels
-          to a very low-resolution <code>28&times;28&times;2</code>
-          {" "}
+          to a very low-resolution <code>28&times;28&times;2</code>{" "}
           and scaled them up again using bilinear interpolation. The resulting
           image looked practically indistinguishable from from the original with
           high resolution colors.
@@ -316,9 +314,7 @@ export default function Residency(request) {
           low-resolution color output, pushing colors that bled beyond
           boundaries back into their proper locations&mdash;a feed-forward
           image-to-image CNN trained with just L2 loss. We also used a good
-          pre-trained{" "}
-          <a href="https://arxiv.org/abs/1512.03385">ResNet</a>
-          {" "}
+          pre-trained <a href="https://arxiv.org/abs/1512.03385">ResNet</a>{" "}
           for the conditioning network, which alliviated the need to add an
           extra loss term, as we had added in the super resolution project.
         </p>
@@ -336,7 +332,8 @@ export default function Residency(request) {
           Since the model yields a probability distribution over possible
           colorizations, for each grayscale input, we could sample from it
           multiple times to get multiple colorizations of the same input. This
-          figure nicely describes the diversity distribution using <a
+          figure nicely describes the diversity distribution using{" "}
+          <a
             href="https://en.wikipedia.org/wiki/Structural_similarity"
           >
             SSIM
@@ -359,14 +356,16 @@ export default function Residency(request) {
           To get a sense of the quality have a look at some images:
           <ul>
             <li>
-              Our model with intermediate stages on <a
+              Our model with intermediate stages on{" "}
+              <a
                 href="step1326412_t100/index.html"
               >
                 a small set of particularly difficult images
               </a>
             </li>
             <li>
-              Our model on <a
+              Our model on{" "}
+              <a
                 href="rld_28px3_t100_500_center_crop_224/"
               >
                 random ImageNet test set images
@@ -381,8 +380,7 @@ export default function Residency(request) {
             <li>
               <a href="ltbc_500_center_crop_224/index.html">
                 Let there be Color!
-              </a>
-              {" "}
+              </a>{" "}
               (<a
                 href="http://hi.cs.waseda.ac.jp/~iizuka/projects/colorization/en/"
               >
@@ -392,15 +390,13 @@ export default function Residency(request) {
             <li>
               <a href="cic_500_center_crop_224/index.html">
                 Colorful Image Colorization
-              </a>
-              {" "}
+              </a>{" "}
               (<a href="http://richzhang.github.io/colorization/">website</a>)
             </li>
             <li>
               <a href="lrac_500_center_crop_224/index.html">
                 Learning Representations for Automatic Colorization
-              </a>
-              {" "}
+              </a>{" "}
               (<a
                 href="http://people.cs.uchicago.edu/~larsson/colorization/"
               >
@@ -434,15 +430,13 @@ export default function Residency(request) {
             href="http://www.nature.com/news/peculiar-pattern-found-in-random-prime-numbers-1.19550"
           >
             new things
-          </a>
-          {" "}
+          </a>{" "}
           are being discovered about the distribution of prime numbers. Perhaps
           deep neural networks, given enough examples, could learn something
           new?
           <a href="https://research.google.com/pubs/MohammadNorouzi.html">
             Mohammad
-          </a>
-          {" "}
+          </a>{" "}
           and I tried two approaches. He modified Google's Neural Machine
           Translation seq2seq model to take a sequence of integers representing
           a large semi-prime as input and predict one of its prime factors as
@@ -512,7 +506,9 @@ export default function Residency(request) {
           internally if you'd like get my implementation.)
         </p>
 
-        <a name="conclusion"><h2>Thoughts, Conclusions</h2></a>
+        <a name="conclusion">
+          <h2>Thoughts, Conclusions</h2>
+        </a>
 
         <p>
           So I'm a software engineer with not much previous experience in ML.
@@ -573,12 +569,13 @@ export default function Residency(request) {
           The culture of testing has not sufficiently caught on yet. We need
           better ways of asserting during training, that various parts of
           networks maintain certain means and variances, don't oscillate too
-          much, or stay within ranges. ML bugs make the <a
+          much, or stay within ranges. ML bugs make the{" "}
+          <a
             href="http://www.catb.org/jargon/html/H/heisenbug.html"
           >
             heisenbugs
-          </a> of {" "}
-          <a href="https://github.com/libuv/libuv">my systems past</a>
+          </a>{" "}
+          of{"  "}<a href="https://github.com/libuv/libuv">my systems past</a>
           {" "}
           seem delightfully easy.
         </p>
@@ -593,12 +590,12 @@ export default function Residency(request) {
           doesn't really help for many models. Synchronous SGD works, but it
           can't increase steps/sec faster than a single machine can process one
           example&mdash;more accurate gradients just don't help much usually.
-          This is why the <a
+          This is why the{" "}
+          <a
             href="https://arxiv.org/abs/1609.08326"
           >
             DCASGD
-          </a>
-          {" "}
+          </a>{" "}
           research direction is important.
         </p>
 
@@ -610,13 +607,14 @@ export default function Residency(request) {
           unorganized glob of data pipelining, mathematics, and
           hyperparameter/configuration management. I believe a beautiful
           abstraction/organization has yet to be discovered. (Or rediscovered,
-          like how <a
+          like how{" "}
+          <a
             href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller"
           >
             MVC
-          </a>
-          {" "}
-          was rediscovered and popularized by <a href="https://twitter.com/dhh">
+          </a>{" "}
+          was rediscovered and popularized by{" "}
+          <a href="https://twitter.com/dhh">
             DHH
           </a>.) My own project structure has been evolving, but I would not
           call it beautiful.
@@ -653,7 +651,9 @@ export default function Residency(request) {
         <p>
           <a href="https://xkcd.com/1838/">
             <img src="/static/residency/machine_learning.png" />
-            <center><small>xkcd</small></center>
+            <center>
+              <small>xkcd</small>
+            </center>
           </a>
         </p>
 

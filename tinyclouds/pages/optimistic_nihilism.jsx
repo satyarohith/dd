@@ -24,12 +24,12 @@ export default function OptimisticNihilism(request) {
         <h1>Optimistic Nihilism</h1>
 
         <p>
-          This post is in response to the <a
+          This post is in response to the{" "}
+          <a
             href="https://www.youtube.com/watch?v=MBRqu0YOH14"
           >
             Optimistic Nihilism
-          </a>
-          {" "}
+          </a>{" "}
           video by Kurzgesagt. Optimistic Nihilism perfectly describes my
           perspective on life and the universe. I want to add my interpretation
           of the philosophy and spice it up with some science fiction ideas.
@@ -39,20 +39,15 @@ export default function OptimisticNihilism(request) {
 
         <p>
           It's clear that in our modern era, with our extremely robust theories
-          of physics, backed by
-          {" "}
-          <a href="https://en.wikipedia.org/wiki/LIGO">extremely</a>
-          {" "}
+          of physics, backed by{" "}
+          <a href="https://en.wikipedia.org/wiki/LIGO">extremely</a>{" "}
           <a href="https://en.wikipedia.org/wiki/Large_Hadron_Collider">
             precise
-          </a>
-          {" "}
+          </a>{" "}
           <a href="https://en.wikipedia.org/wiki/Cosmic_microwave_background">
             observations
-          </a>
-          {" "}
-          of the universe, that the religious explanations of existence are
-          {" "}
+          </a>{" "}
+          of the universe, that the religious explanations of existence are{" "}
           <a href="https://en.wikipedia.org/wiki/The_God_Delusion">
             false
           </a>. Our best understanding is that we are matter, not unlike like
@@ -61,13 +56,10 @@ export default function OptimisticNihilism(request) {
         </p>
         <p>
           It is also clear that the universe does not care about us. I think
-          it's important to internalize how {" "}
-          <a href="https://www.youtube.com/watch?v=xY59mR44TLs">quickly</a>
-          {" "}
-          <a href="https://www.youtube.com/watch?v=g_zPvSLemdA">life</a>
-          {" "}
-          <a href="https://www.youtube.com/watch?v=_B7-Zg7QmMA">can</a>
-          {" "}
+          it's important to internalize how{"  "}
+          <a href="https://www.youtube.com/watch?v=xY59mR44TLs">quickly</a>{" "}
+          <a href="https://www.youtube.com/watch?v=g_zPvSLemdA">life</a>{" "}
+          <a href="https://www.youtube.com/watch?v=_B7-Zg7QmMA">can</a>{" "}
           <a href="https://www.youtube.com/watch?v=Rr7u345D3xc">
             end
           </a>. (Beware: the links are videos of people dying.) You can simply
@@ -87,11 +79,13 @@ export default function OptimisticNihilism(request) {
           In the past couple decades, we've come to understand how very isolated
           and rare life is in the universe. Unfortunately, there are no green
           men on Mars. We search and search for some evidence of any life
-          anywhere&mdash;in <a
+          anywhere&mdash;in{" "}
+          <a
             href="https://en.wikipedia.org/wiki/Search_for_extraterrestrial_intelligence"
           >
             electromagnetic magnetic radition
-          </a>, in <a href="https://en.wikipedia.org/wiki/Curiosity_(rover)">
+          </a>, in{" "}
+          <a href="https://en.wikipedia.org/wiki/Curiosity_(rover)">
             Martian soil
           </a>
           &mdash;the results are null. The universe is very large and it seems
@@ -111,12 +105,12 @@ export default function OptimisticNihilism(request) {
         <p>
           It's possible to send people to Mars; it might even happen in the next
           few years. By stretching one's imagination generations into the
-          future, it's <a
+          future, it's{" "}
+          <a
             href="https://en.wikipedia.org/wiki/Colonization_of_Mars"
           >
             maaaaybe
-          </a>
-          {" "}
+          </a>{" "}
           possible we could have largish populations of humans on Mars... But
           the other planets are utterly inhospitable. The surface of Venus is
           400 degrees and the atmosphere is so corrosive that it eats metal. The
@@ -132,7 +126,8 @@ export default function OptimisticNihilism(request) {
           The fastest speed ever achieved by a human made object was 25 miles
           per second with the Juno spacecraft. If we somehow pack a ship with
           humans and supplies and travel at that speed towards the nearest star,
-          it would take <a
+          it would take{" "}
+          <a
             href={`https://www.google.com/search?q=4.24+light+years+%2F+%2825+miles%2Fsec%29&oq=4.24+light+years+%2F+%2825+miles%2Fsec%29&gs_l=psy-ab.3...4834.6602.0.7435.6.6.0.0.0.0.159.645.3j3.6.0....0...1.1.64.psy-ab..0.3.348...33i22i29i30k1j33i160k1.KZ7oTn3-gOo`}
           >
             more than 30,000 years
@@ -150,10 +145,12 @@ export default function OptimisticNihilism(request) {
           All we have is this planet, and there are so many ways it can go
           wrong. It's entirely conceivable that some chemical we're pouring into
           the environment destroys some fragile balance, global temperatures
-          rise and <b>
+          rise and{" "}
+          <b>
             we all die
           </b>. It's entirely conceivable a human virus spreads through our
-          dense global society and <b>
+          dense global society and{" "}
+          <b>
             we all die
           </b>. It's entirely conceivable that a hunk of metal the size of
           Manhattan falls from the sky and <b>we all die</b>.
@@ -167,22 +164,20 @@ export default function OptimisticNihilism(request) {
 
         <p>
           We are just beginning to understand the mechanisms of the brain. The
-          emerging understanding is that many <a
+          emerging understanding is that many{" "}
+          <a
             href="https://en.wikipedia.org/wiki/Neuron"
           >
             small cells
-          </a>
-          {" "}
+          </a>{" "}
           interact with electrical chemical pulses to process sensory
           information and react with muscle movements. Although we don't
           understand the mechanics of consciousness (<a
             href="https://www.princeton.edu/~graziano/Consciousness_Research.html"
           >
             maybe
-          </a>
-          {" "}
-          it's some kind of control system for higher level
-          {" "}
+          </a>{" "}
+          it's some kind of control system for higher level{" "}
           <a href="https://arxiv.org/abs/1406.6247">
             attention
           </a>), all evidence suggests that it's an entirely physical process
@@ -192,9 +187,11 @@ export default function OptimisticNihilism(request) {
         <p>
           Thus when you die, and the cells in your head deteriorate, the
           animated flicker of your being will cease to exist, forever. I echo
-          Kurzgesagt and answer the ancient question: <b>
+          Kurzgesagt and answer the ancient question:{" "}
+          <b>
             What happens when you die?
-          </b> You simply cease to exist.
+          </b>{" "}
+          You simply cease to exist.
         </p>
 
         <p>
@@ -218,14 +215,13 @@ export default function OptimisticNihilism(request) {
         </p>
 
         <p>
-          <a href="https://youtu.be/mvmuCPvRoWQ">Create art</a>, {" "}
+          <a href="https://youtu.be/mvmuCPvRoWQ">Create art</a>,{"  "}
           <a href="http://feastmeetswest.com/">
             eat all the food
           </a>,{" "}
           <a href="https://www.youtube.com/watch?v=8nrVrWkq_dc">
             enjoy music
-          </a>,{" "}
-          <a href="https://stronglifts.com/5x5/">exercise</a>,{" "}
+          </a>, <a href="https://stronglifts.com/5x5/">exercise</a>,{" "}
           <a
             href="https://en.wikipedia.org/wiki/Misfits_(TV_series)#Series_1_.282009.29"
           >
@@ -240,8 +236,7 @@ export default function OptimisticNihilism(request) {
             href="https://www.amazon.com/Ethical-Slut-Practical-Relationships-Adventures/dp/1587613379"
           >
             have sex
-          </a>, and
-          {" "}
+          </a>, and{" "}
           <a
             href="https://www.amazon.com/Pumpkin-Dills-Atlantic-Giant-Seeds/dp/B000N48QSQ"
           >
@@ -255,7 +250,7 @@ export default function OptimisticNihilism(request) {
             href="https://en.wikipedia.org/wiki/Health_issues_in_American_football"
           >
             injuries
-          </a>, and {" "}
+          </a>, and{"  "}
           <a
             href="https://www.nytimes.com/interactive/2017/06/05/upshot/opioid-epidemic-drug-overdose-deaths-are-rising-faster-than-ever.html?_r=0"
           >
@@ -271,12 +266,12 @@ export default function OptimisticNihilism(request) {
           simplification in theory combined with practical progress in the past
           couple years. The best ML algorithms are now, definitively, artificial
           neural networks; which were designed with inspiration from brain
-          biology. These neural networks are still <a
+          biology. These neural networks are still{" "}
+          <a
             href="http://tinyclouds.org/residency/"
           >
             difficult to employ
-          </a>
-          {" "}
+          </a>{" "}
           and not well understood, but it seems likely they will enable us to
           solve all sorts of yet-unsolved problems.
         </p>
@@ -293,13 +288,16 @@ export default function OptimisticNihilism(request) {
           and build a machine that understands and thinks, like humans do.
           Artificial consciousness is many years from reality, but it's more
           than conceivable. The foundational components might already be
-          emerging in <a
+          emerging in{" "}
+          <a
             href="https://www.nvidia.com/en-us/data-center/volta-gpu-architecture/"
           >
             advanced GPUs
-          </a>, <a href="https://www.tensorflow.org/">
+          </a>,{" "}
+          <a href="https://www.tensorflow.org/">
             back propagation frameworks
-          </a>, and <a
+          </a>, and{" "}
+          <a
             href="https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv"
           >
             convolutional architectures
@@ -317,12 +315,12 @@ export default function OptimisticNihilism(request) {
           <a href="https://www.youtube.com/watch?v=CXSi4GXUojo">
             Jet engines
           </a>, for example, are complex machines that operate with remarkable
-          reliability at high temperatures. We have <a
+          reliability at high temperatures. We have{" "}
+          <a
             href="https://en.wikipedia.org/wiki/Heavy_Press_Program"
           >
             forging presses
-          </a>
-          {" "}
+          </a>{" "}
           that can squeeze with enormous amounts of force. We have satellites
           that operate for decades in hostile vacuum and radiation. We build
           very tall structures that withstand the strongest winds without the
@@ -352,8 +350,7 @@ export default function OptimisticNihilism(request) {
             href={`https://www.amazon.com/Superintelligence-Dangers-Strategies-Nick-Bostrom/dp/0198739834/ref=pd_sim_14_1?_encoding=UTF8&pd_rd_i=0198739834&pd_rd_r=1F2B26AKWZT8ZVX12MZ7&pd_rd_w=k1jM4&pd_rd_wg=gmn8V&psc=1&refRID=1F2B26AKWZT8ZVX12MZ7`}
           >
             Some
-          </a>
-          {" "}
+          </a>{" "}
           worry that an artificial consciousnesses could turn against humans. I
           am not concerned about this. First of all, we are many years away from
           such technology. The "AI" that I deal with in my research is so

@@ -6,17 +6,29 @@ export default function homePage(request) {
     <Layout title="tinyclouds">
       <body className="index">
         <main>
-          <p><img src="static/ry.jpg" height="100" /></p>
+          <p>
+            <img src="static/ry.jpg" height="100" />
+          </p>
           <h1>Ryan Dahl</h1>
-          <p><a href="mailto:ry@tinyclouds.org">ry@tinyclouds.org</a></p>
+          <p>
+            <a href="mailto:ry@tinyclouds.org">ry@tinyclouds.org</a>
+          </p>
           <br />
-          <p><a href="https://deno.land/">Deno</a></p>
+          <p>
+            <a href="https://deno.land/">Deno</a>
+          </p>
 
-          <p><a href="optimistic_nihilism/">Optimistic Nihilism</a></p>
+          <p>
+            <a href="optimistic_nihilism/">Optimistic Nihilism</a>
+          </p>
 
-          <p><a href="residency">Google Brain Residency</a></p>
+          <p>
+            <a href="residency">Google Brain Residency</a>
+          </p>
 
-          <p><a href="colorize">Automatic Colorization</a></p>
+          <p>
+            <a href="colorize">Automatic Colorization</a>
+          </p>
 
           <p>
             <a href="http://github.com/ry/v8worker">
@@ -24,7 +36,9 @@ export default function homePage(request) {
             </a>: Minimal golang binding to V8
           </p>
 
-          <p><a href="rant.html">I hate almost all software</a></p>
+          <p>
+            <a href="rant.html">I hate almost all software</a>
+          </p>
 
           <p>
             <a href="iocp-links.html">
@@ -48,11 +62,17 @@ export default function homePage(request) {
             </a>, <a href="static/jsconf.pdf">slide deck</a>)
           </p>
 
-          <p><a href="https://github.com/joyent/http-parser">http-parser</a></p>
+          <p>
+            <a href="https://github.com/joyent/http-parser">http-parser</a>
+          </p>
 
-          <p><a href="math/index.html">random math stuff</a></p>
+          <p>
+            <a href="math/index.html">random math stuff</a>
+          </p>
 
-          <p><a href="visual">random photoshop experiments</a></p>
+          <p>
+            <a href="visual">random photoshop experiments</a>
+          </p>
         </main>
       </body>
     </Layout>

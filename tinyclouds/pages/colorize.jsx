@@ -26,12 +26,12 @@ export default function Colorize(request) {
         <h1>Automatic Colorization</h1>
 
         <p>
-          Have you seen Reddit's <a
+          Have you seen Reddit's{" "}
+          <a
             href="https://www.reddit.com/r/Colorization"
           >
             /r/colorization
-          </a>
-          {" "}
+          </a>{" "}
           sub? People use photoshop to add color to old black and white photos.
           This is a good problem to automate because perfect training data is
           easy to get: any color image can be desaturated and used as an
@@ -44,12 +44,12 @@ export default function Colorize(request) {
         </p>
 
         <p>
-          In the past few years <a
+          In the past few years{" "}
+          <a
             href="https://en.wikipedia.org/wiki/Convolutional_neural_network"
           >
             Convolutional Neural Networks
-          </a>
-          {" "}
+          </a>{" "}
           (CNNs) have revolutionized the field of computer vision. Each year the
           ImageNet Challenge (ILSVRC) has seen plummeting error rates due to the
           ubiquitous adoption of CNN models amongst the contestants. As of this
@@ -59,10 +59,8 @@ export default function Colorize(request) {
             href="http://googleresearch.blogspot.com/2015/06/inceptionism-going-deeper-into-neural.html"
           >
             Amazing
-          </a>
-          {" "}
-          <a href="http://arxiv.org/abs/1508.06576">visualizations</a>
-          {" "}
+          </a>{" "}
+          <a href="http://arxiv.org/abs/1508.06576">visualizations</a>{" "}
           have shown that pre-trained classification models can be retooled for
           other purposes.
         </p>
@@ -89,15 +87,14 @@ export default function Colorize(request) {
         </div>
 
         <p>
-          There are bad cases too, which mostly look black and white or {" "}
+          There are bad cases too, which mostly look black and white or{"  "}
           <a href="https://en.wikipedia.org/wiki/Photographic_print_toning">
             sepia toned
           </a>.
         </p>
 
         <p>
-          <a href="/colorize/val-imgs/">Here</a>
-          {" "}
+          <a href="/colorize/val-imgs/">Here</a>{" "}
           are a bunch of random validation images if you're interested in
           getting a better idea of its competence. The image files are named
           after the training iteration that they're from. So higher numbered
@@ -106,7 +103,7 @@ export default function Colorize(request) {
 
         <p>
           From here on I'm going to assume you have some familiarity with how
-          CNNs work. For a great introduction check out {" "}
+          CNNs work. For a great introduction check out{"  "}
           <a href="http://cs231n.github.io/convolutional-networks/">
             Karpathy's CS231n
           </a>.
@@ -116,7 +113,8 @@ export default function Colorize(request) {
 
         <p>
           In CNN classification models (like the ones made for ILSVRC), more
-          info can be extracted than just the final classification. <a
+          info can be extracted than just the final classification.{" "}
+          <a
             href="http://arxiv.org/abs/1311.2901"
           >
             Zeiler and Fergus
@@ -130,20 +128,20 @@ export default function Colorize(request) {
         <p>First order of business was picking a pre-trained model to use.</p>
 
         <p>
-          So I wanted to use a pretrained image classification model (from <a
+          So I wanted to use a pretrained image classification model (from{" "}
+          <a
             href="https://github.com/BVLC/caffe/wiki/Model-Zoo"
           >
             the Caffe model zoo
-          </a>) to extract features for colorization. I chose the <a
+          </a>) to extract features for colorization. I chose the{" "}
+          <a
             href="https://gist.github.com/ksimonyan/211839e770f7b538e2d8#file-readme-md"
           >
             VGG-16 model
-          </a>
-          {" "}
+          </a>{" "}
           because it has a simple architecure yet still competitive (second
           place in 2014 ILSVRC).
-          <a href="http://arxiv.org/abs/1411.5752">This paper</a>
-          {" "}
+          <a href="http://arxiv.org/abs/1411.5752">This paper</a>{" "}
           introduces the idea of "hypercolumns" in a CNN. A hypercolumn for a
           pixel in the input image is a vector of all the activations above that
           pixel. The way I implemented this was by forwarding an image thru the
@@ -163,7 +161,8 @@ export default function Colorize(request) {
         <p>
           Rather than reconstructing the entire color RGB image, I trained
           models to produce two color channels which I concatenate with the
-          grayscale input channel to produce a <a
+          grayscale input channel to produce a{" "}
+          <a
             href="https://en.wikipedia.org/wiki/YUV"
           >
             YUV image
@@ -217,7 +216,8 @@ export default function Colorize(request) {
         </p>
 
         <p>
-          Also I only calculuate the distance in UV space. Here's the <a
+          Also I only calculuate the distance in UV space. Here's the{" "}
+          <a
             href="https://gist.github.com/ry/148158137a1346eaea8e"
           >
             exact code
@@ -229,19 +229,19 @@ export default function Colorize(request) {
         <p>
           I use ReLUs as activation functions throughout except at the last
           output to UV channels&mdash;there I use a sigmoid to squash values
-          between 0 and 1. I use <a
+          between 0 and 1. I use{" "}
+          <a
             href="https://github.com/ry/deep_learning_glossary#batch-normialization-bn"
           >
             batch norm
-          </a>
-          {" "}
+          </a>{" "}
           (BN) instead of bias terms behind every convolution. I experiemented
-          with using <a
+          with using{" "}
+          <a
             href="https://github.com/ry/deep_learning_glossary#exponential-linear-units-elus"
           >
             ELUs
-          </a>
-          {" "}
+          </a>{" "}
           instead of and in addition to BN, but with limited success. I did not
           experience great gains with leaky ReLUs. I experiemented using dropout
           in various places, but it didn't seem to help much. A learning rate of
@@ -249,12 +249,12 @@ export default function Colorize(request) {
         </p>
 
         <p>
-          Models were trained on the <a
+          Models were trained on the{" "}
+          <a
             href="http://academictorrents.com/details/a306397ccf9c2ead27155983c254227c0fd938e2/tech"
           >
             ILSVRC 2012
-          </a>
-          {" "}
+          </a>{" "}
           classification training dataset. The same training set used for the
           pretrained VGG16. It's 147GB and over 1.2 million images!
         </p>
@@ -290,12 +290,12 @@ export default function Colorize(request) {
           VGG16 and then using the highest layer infers some color information.
           Then it upscales the color guess and adds in information from the next
           highest layer, and so on working down to the bottom of the VGG16 until
-          there is 224 x 224 x 3 tensor. I was inspired by <a
+          there is 224 x 224 x 3 tensor. I was inspired by{" "}
+          <a
             href="http://arxiv.org/abs/1512.03385"
           >
             Microsoft Research's winning classificaiton entry
-          </a>
-          {" "}
+          </a>{" "}
           for ILSVRC 2015 in which they add residual connections skipping over
           every two layers. I used residual connections to add in information as
           it works its way down the VGG16.
@@ -424,15 +424,19 @@ export default function Colorize(request) {
         <p>
           <a href="/static/colorize/colorize-20160110.tgz.torrent">
             colorize-20160110.tgz.torrent
-          </a> 492M
+          </a>{" "}
+          492M
         </p>
 
         <p>
-          This model containes <a
+          This model containes{" "}
+          <a
             href="https://gist.github.com/ksimonyan/211839e770f7b538e2d8"
           >
             the VGG16 model
-          </a> from Karen Simonyan and Andrew Zisserman (that I <a
+          </a>{" "}
+          from Karen Simonyan and Andrew Zisserman (that I{" "}
+          <a
             href="https://github.com/ry/tensorflow-vgg16"
           >
             converted to TensorFlow
@@ -448,7 +452,8 @@ export default function Colorize(request) {
             I only used 4 layers from VGG16 because I have limited compute
             resources. This could be extended to use all 5 pooling layers.
             Better would be to replace VGG16 with a more modern classification
-            model like <a href="http://arxiv.org/abs/1512.03385">
+            model like{" "}
+            <a href="http://arxiv.org/abs/1512.03385">
               ResNet
             </a>. More layers and more training will improve the results.
           </li>
@@ -469,7 +474,9 @@ export default function Colorize(request) {
             different colors on overlapped regions and will probably not preform
             well if the image is very high resolution and the 224 x 224 don't
             contain any identifiable objects. It's also a lot of computation.
-            I'd much prefer to use a RNN driven attention mechanism like used <a
+            I'd much prefer to use a RNN driven attention mechanism like used
+            {" "}
+            <a
               href="http://arxiv.org/abs/1412.7755"
             >
               in this paper
@@ -508,7 +515,8 @@ export default function Colorize(request) {
         </p>
 
         <p>
-          <a href="http://samim.io/">Samim</a> used the model to color <a
+          <a href="http://samim.io/">Samim</a> used the model to color{" "}
+          <a
             href="https://www.youtube.com/watch?v=_MJU8VK2PI4"
           >
             this Charlie Chaplin movie

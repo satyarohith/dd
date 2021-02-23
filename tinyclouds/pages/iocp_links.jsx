@@ -9,7 +9,8 @@ export default function IocpLinks(request) {
       <main>
         <p>
           This document was an attempt at understanding how best to port Node.js
-          to Windows. The result of the port was the library <a
+          to Windows. The result of the port was the library{" "}
+          <a
             href="https://github.com/libuv/libuv"
           >
             libuv
@@ -28,17 +29,13 @@ export default function IocpLinks(request) {
         </p>
 
         <p>
-          The syscall {" "}
+          The syscall{"  "}
           <a
             href="http://msdn.microsoft.com/en-us/library/ms740141(v=VS.85).aspx"
           >
-            <code>select</code>
-            {" "}
-            is available in Windows
-          </a>
-          {" "}
-          but <code>select</code>
-          {" "}
+            <code>select</code> is available in Windows
+          </a>{" "}
+          but <code>select</code>{" "}
           processing is O(n) in the number of file descriptors unlike the modern
           constant-time multiplexers like epoll which makes select unacceptable
           for high-concurrency servers. This document will describe how
@@ -46,25 +43,22 @@ export default function IocpLinks(request) {
         </p>
 
         <p>
-          Instead of <a href="http://en.wikipedia.org/wiki/Epoll">epoll</a>
+          Instead of <a href="http://en.wikipedia.org/wiki/Epoll">epoll</a> or
           {" "}
-          or{" "}
           <a href="http://en.wikipedia.org/wiki/Kqueue">
             kqueue
-          </a>, Windows has its own I/O multiplexer called {" "}
+          </a>, Windows has its own I/O multiplexer called{"  "}
           <a
             href="http://msdn.microsoft.com/en-us/library/aa365198(VS.85).aspx"
           >
             I/O completion ports
-          </a>
-          {" "}
+          </a>{" "}
           (IOCPs). IOCPs are the objects used to poll{" "}
           <a
             href="http://msdn.microsoft.com/en-us/library/ms686358(v=vs.85).aspx"
           >
             overlapped I/O
-          </a>
-          {" "}
+          </a>{" "}
           for completion. IOCP polling is constant time (REF?).
         </p>
 
@@ -73,14 +67,15 @@ export default function IocpLinks(request) {
           kernel to wait for state change in a file descriptor's readability or
           writablity. With overlapped I/O and IOCPs the programmers waits for
           asynchronous function calls to complete. For example, instead of
-          waiting for a socket to become writable and then using <a
+          waiting for a socket to become writable and then using{" "}
+          <a
             href="http://www.kernel.org/doc/man-pages/online/pages/man2/send.2.html"
           >
             <code>send(2)</code>
-          </a>
-          {" "}
+          </a>{" "}
           on it, as you commonly would do in a Unix, with overlapped I/O you
-          would rather <a
+          would rather{" "}
+          <a
             href="http://msdn.microsoft.com/en-us/library/ms742203(v=vs.85).aspx"
           >
             <code>WSASend()</code>
@@ -92,20 +87,21 @@ export default function IocpLinks(request) {
         <p>
           Unix non-blocking I/O is not beautiful. A principle abstraction in
           Unix is the unified treatment of many things as files (or more
-          precisely as file descriptors). <code>write(2)</code>, <code>
+          precisely as file descriptors). <code>write(2)</code>,{" "}
+          <code>
             read(2)
-          </code>, and{" "}
-          <code>close(2)</code>
+          </code>, and <code>close(2)</code>
           work with TCP sockets just as they do on regular files.
           Well&mdash;kind of. Synchronous operations work similarly on different
           types of file descriptors but once demands on performance drive you to
-          world of {" "}
-          <code>O_NONBLOCK</code>
-          {" "}
+          world of{"  "}<code>O_NONBLOCK</code>{" "}
           various types of file descriptors can act quite different for even the
-          most basic operations. In particular, regular file system files do <i>
+          most basic operations. In particular, regular file system files do
+          {" "}
+          <i>
             not
-          </i> support non-blocking operations.
+          </i>{" "}
+          support non-blocking operations.
 
           (Disturbingly no man page mentions this rather important fact.)
 
@@ -113,40 +109,37 @@ export default function IocpLinks(request) {
           expecting it to indicate when it is safe to do a non-blocking read.
 
           Regular file are always readable and <code>read(2)</code> calls{" "}
-          <i>always</i>
-          {" "}
+          <i>always</i>{" "}
           have the possibility of blocking the calling thread for an unknown
           amount of time.
         </p>
 
         <p>
-          POSIX has defined <a
+          POSIX has defined{" "}
+          <a
             href="http://pubs.opengroup.org/onlinepubs/007908799/xsh/aio.h.html"
           >
             an asynchronous interface
-          </a>
-          {" "}
+          </a>{" "}
           for some operations but implementations for many Unixes have unclear
-          status. On Linux the {" "}
-          <code>aio_*</code>
-          {" "}
-          routines are implemented in userland in GNU libc using pthreads. {" "}
+          status. On Linux the{"  "}<code>aio_*</code>{" "}
+          routines are implemented in userland in GNU libc using pthreads.{"  "}
           <a
             href="http://www.kernel.org/doc/man-pages/online/pages/man2/io_submit.2.html"
           >
             <code>io_submit(2)</code>
-          </a>
-          {" "}
-          does not have a GNU libc wrapper and has been reported <a
+          </a>{" "}
+          does not have a GNU libc wrapper and has been reported{" "}
+          <a
             href="http://voinici.ceata.org/~sana/blog/?p=248"
           >
             to be very slow and possibly blocking
-          </a>. <a
+          </a>.{" "}
+          <a
             href="http://download.oracle.com/docs/cd/E19253-01/816-5171/aio-write-3rt/index.html"
           >
             Solaris has real kernel AIO
-          </a>
-          {" "}
+          </a>{" "}
           but it's unclear what its performance characteristics are for socket
           I/O as opposed to disk I/O. Contemporary high-performance Unix socket
           programs use non-blocking file descriptors with a I/O
@@ -157,16 +150,17 @@ export default function IocpLinks(request) {
 
         <p>
           Windows IOCPs does support both sockets and regular file I/O which
-          greatly simplifies the handling of disks. For example, {" "}
+          greatly simplifies the handling of disks. For example,{"  "}
           <a
             href="http://msdn.microsoft.com/en-us/library/aa365468(v=VS.85).aspx"
           >
             <code>ReadFileEx()</code>
-          </a>
-          {" "}
-          operates on both. As a first example let's look at how <code>
+          </a>{" "}
+          operates on both. As a first example let's look at how{" "}
+          <code>
             ReadFile()
-          </code> works.
+          </code>{" "}
+          works.
         </p>
 
         <pre>
@@ -184,22 +178,22 @@ export default function IocpLinks(request) {
         <p>
           The function has the possibility of executing the read synchronously
           or asynchronously. A synchronous operation is indicated by returning 0
-          and <a
+          and{" "}
+          <a
             href="http://msdn.microsoft.com/en-us/library/ms741580(v=VS.85).aspx"
           >
             <code>WSAGetLastError()</code>
-          </a>
-          {" "}
-          returning <code>WSA_IO_PENDING</code>. When <code>
+          </a>{" "}
+          returning <code>WSA_IO_PENDING</code>. When{" "}
+          <code>
             ReadFile()
-          </code>
-          {" "}
-          operates asynchronously the the user-supplied <a
+          </code>{" "}
+          operates asynchronously the the user-supplied{" "}
+          <a
             href="http://msdn.microsoft.com/en-us/library/ms741665(v=VS.85).aspx"
           >
             <code>OVERLAPPED*</code>
-          </a>
-          {" "}
+          </a>{" "}
           is a handle to the incomplete operation.
         </p>
 
@@ -220,9 +214,10 @@ export default function IocpLinks(request) {
        `}
         </pre>
 
-        To poll on the completion of one of these functions, use an IOCP, <code>
+        To poll on the completion of one of these functions, use an IOCP,{" "}
+        <code>
           {"overlapped->hEvent"}
-        </code>, and {" "}
+        </code>, and{"  "}
         <a
           href="http://msdn.microsoft.com/en-us/library/aa364986(v=vs.85).aspx"
         >
@@ -295,7 +290,7 @@ export default function IocpLinks(request) {
 
         <p>
           <b>
-            Marc Lehmann's {" "}
+            Marc Lehmann's{"  "}
             <a href="http://software.schmorp.de/pkg/libev.html">libev</a> and
             {" "}
             <a href="http://software.schmorp.de/pkg/libeio.html">
@@ -303,49 +298,58 @@ export default function IocpLinks(request) {
             </a>.{" "}
           </b>
           libev is the perfect minimal abstraction of the Unix I/O multiplexers.
-          It includes several helpful tools like <code>
+          It includes several helpful tools like{" "}
+          <code>
             ev_async
           </code>, which is for asynchronous notification, but the main piece is
-          the <code>
+          the{" "}
+          <code>
             ev_io
           </code>, which informs the user about the state of file descriptors.
           As mentioned before, in general it is not possible to get state
-          changes for regular files&mdash;and even if it were the <code>
+          changes for regular files&mdash;and even if it were the{" "}
+          <code>
             write(2)
-          </code> and{" "}
-          <code>read(2)</code>
-          {" "}
+          </code>{" "}
+          and <code>read(2)</code>{" "}
           calls do not guarantee that they won't block. Therefore libeio is
           provided for calling various disk-related syscalls in a managed thread
           pool. Unfortunately the abstraction layer which libev targets is not
           appropriate for IOCPs&mdash;libev works strictly with file descriptors
-          and does not the concept of a <i>
+          and does not the concept of a{" "}
+          <i>
             socket
           </i>. Furthermore users on Unix will be using libeio for file I/O
           which is not ideal for porting to Windows. On windows libev currently
-          uses {" "}
+          uses{"  "}
           <code>
             select()
           </code>&mdash;which is limited to 64 file descriptors per thread.
         </p>
 
         <p>
-          <b><a href="http://monkey.org/~provos/libevent/">libevent</a>.</b>
-          {" "}
+          <b>
+            <a href="http://monkey.org/~provos/libevent/">libevent</a>.
+          </b>{" "}
           Somewhat bulkier than libev with code for RPC, DNS, and HTTP included.
-          Does not support file I/O. libev was created after Lehmann <a
+          Does not support file I/O. libev was created after Lehmann{" "}
+          <a
             href="http://www.mail-archive.com/libevent-users@monkey.org/msg00753.html"
           >
             evaluated libevent and rejected it
-          </a>&mdash;it's interesting to read his reasons why. <a
+          </a>&mdash;it's interesting to read his reasons why.{" "}
+          <a
             href="http://google-opensource.blogspot.com/2010/01/libevent-20x-like-libevent-14x-only.html"
           >
             A major rewrite
-          </a> was done for version 2 to support Windows IOCPs but <a
+          </a>{" "}
+          was done for version 2 to support Windows IOCPs but{" "}
+          <a
             href="http://www.mail-archive.com/libevent-users@monkey.org/msg01730.html"
           >
             anecdotal evidence
-          </a> suggests that it is still not working correctly.
+          </a>{" "}
+          suggests that it is still not working correctly.
         </p>
 
         <p>
@@ -355,8 +359,7 @@ export default function IocpLinks(request) {
             >
               Boost ASIO
             </a>.
-          </b>
-          {" "}
+          </b>{" "}
           It basically does what you want on Windows and Unix for sockets. That
           is, epoll on Linux, kqueue on Macintosh, IOCPs on Windows. It does not
           support file I/O. In the author's opinion is it too large for a not
@@ -376,7 +379,7 @@ export default function IocpLinks(request) {
         should expect to be handling tens of thousands of these per thread,
         concurrently. This is possible with overlapped I/O in Windows if one is
         careful to avoid Unix-ism like file descriptors. (Windows has a hard
-        limit of 2048 open file descriptors&mdash;see {" "}
+        limit of 2048 open file descriptors&mdash;see{"  "}
         <a
           href="http://msdn.microsoft.com/en-us/library/6e3b887c.aspx"
         >
@@ -384,7 +387,9 @@ export default function IocpLinks(request) {
         </a>.)
 
         <dl>
-          <dt><code>send(2)</code>, <code>write(2)</code></dt>
+          <dt>
+            <code>send(2)</code>, <code>write(2)</code>
+          </dt>
           <dd>
             Windows:
             <a
@@ -401,7 +406,9 @@ export default function IocpLinks(request) {
             </a>
           </dd>
 
-          <dt><code>recv(2)</code>, <code>read(2)</code></dt>
+          <dt>
+            <code>recv(2)</code>, <code>read(2)</code>
+          </dt>
           <dd>
             Windows:
             <a
@@ -418,9 +425,12 @@ export default function IocpLinks(request) {
             </a>
           </dd>
 
-          <dt><code>connect(2)</code></dt>
+          <dt>
+            <code>connect(2)</code>
+          </dt>
           <dd>
-            Windows: <a
+            Windows:{" "}
+            <a
               href="http://msdn.microsoft.com/en-us/library/ms737606(VS.85).aspx"
             >
               <code>ConnectEx()</code>
@@ -437,27 +447,34 @@ export default function IocpLinks(request) {
                 {`int error;\n\tsocklen_t len = sizeof(int);\n\tgetsockopt(fd,` +
                   `SOL_SOCKET, SO_ERROR, &error, &len);`}
               </pre>
-              A zero <code>error</code>
-              {" "}
-              indicates that the connection succeeded. (Documented in <code>
+              A zero <code>error</code>{" "}
+              indicates that the connection succeeded. (Documented in{" "}
+              <code>
                 connect(2)
-              </code> under <code>EINPROGRESS</code>
+              </code>{" "}
+              under <code>EINPROGRESS</code>
               on the Linux man page.)
             </p>
           </dd>
 
-          <dt><code>accept(2)</code></dt>
+          <dt>
+            <code>accept(2)</code>
+          </dt>
           <dd>
-            Windows: <a
+            Windows:{" "}
+            <a
               href="http://msdn.microsoft.com/en-us/library/ms737524(v=VS.85).aspx"
             >
               <code>AcceptEx()</code>
             </a>
           </dd>
 
-          <dt><code>sendfile(2)</code></dt>
+          <dt>
+            <code>sendfile(2)</code>
+          </dt>
           <dd>
-            Windows: <a
+            Windows:{" "}
+            <a
               href="http://msdn.microsoft.com/en-us/library/ms740565(v=VS.85).aspx"
             >
               <code>TransmitFile()</code>
@@ -492,7 +509,8 @@ export default function IocpLinks(request) {
                 </a>
               </li>
             </ul>
-            Marc Lehmann has written <a
+            Marc Lehmann has written{" "}
+            <a
               href="https://github.com/joyent/node/blob/2c185a9dfd3be8e718858b946333c433c375c295/deps/libeio/eio.c#L954-1080"
             >
               a portable version in libeio
@@ -516,7 +534,9 @@ export default function IocpLinks(request) {
             </a>
           </dd>
 
-          <dt><code>close(2)</code></dt>
+          <dt>
+            <code>close(2)</code>
+          </dt>
           <dd>
             <a
               href="http://msdn.microsoft.com/en-us/library/ms737582(v=VS.85).aspx"
@@ -554,21 +574,23 @@ export default function IocpLinks(request) {
 
           <h3>Named Pipes</h3>
 
-          Windows has "named pipes" which are more or less the same as <a
+          Windows has "named pipes" which are more or less the same as{" "}
+          <a
             href="http://www.kernel.org/doc/man-pages/online/pages/man7/unix.7.html"
           >
-            <code>AF_Unix</code>
-            {" "}
-            domain sockets
-          </a>. <code>AF_Unix</code>
-          {" "}
+            <code>AF_Unix</code> domain sockets
+          </a>. <code>AF_Unix</code>{" "}
           sockets exist in the file system often looking like
-          <pre>/tmp/<i>pipename</i></pre>
+          <pre>
+            /tmp/<i>pipename</i>
+          </pre>
 
           Windows named pipes have a path, but they are not directly part of the
           file system; instead they look like
 
-          <pre>\\.\pipe\<i>pipename</i></pre>
+          <pre>
+            \\.\pipe\<i>pipename</i>
+          </pre>
         </dl>
 
         <dl>
@@ -583,14 +605,17 @@ export default function IocpLinks(request) {
             </a>
 
             <p>
-              Use <code>FILE_FLAG_OVERLAPPED</code>, <code>
+              Use <code>FILE_FLAG_OVERLAPPED</code>,{" "}
+              <code>
                 PIPE_TYPE_BYTE
               </code>,
               <code>PIPE_NOWAIT</code>.
             </p>
           </dd>
 
-          <dt><code>send(2)</code>, <code>write(2)</code></dt>
+          <dt>
+            <code>send(2)</code>, <code>write(2)</code>
+          </dt>
           <dd>
             <a
               href="http://msdn.microsoft.com/en-us/library/aa365748(v=VS.85).aspx"
@@ -599,7 +624,9 @@ export default function IocpLinks(request) {
             </a>
           </dd>
 
-          <dt><code>recv(2)</code>, <code>read(2)</code></dt>
+          <dt>
+            <code>recv(2)</code>, <code>read(2)</code>
+          </dt>
           <dd>
             <a
               href="http://msdn.microsoft.com/en-us/library/aa365468(v=VS.85).aspx"
@@ -608,7 +635,9 @@ export default function IocpLinks(request) {
             </a>
           </dd>
 
-          <dt><code>connect(2)</code></dt>
+          <dt>
+            <code>connect(2)</code>
+          </dt>
           <dd>
             <a
               href="http://msdn.microsoft.com/en-us/library/aa365150(VS.85).aspx"
@@ -617,7 +646,9 @@ export default function IocpLinks(request) {
             </a>
           </dd>
 
-          <dt><code>accept(2)</code></dt>
+          <dt>
+            <code>accept(2)</code>
+          </dt>
           <dd>
             <a
               href="http://msdn.microsoft.com/en-us/library/aa365146(v=VS.85).aspx"
@@ -661,7 +692,9 @@ export default function IocpLinks(request) {
         </p>
 
         <dl>
-          <dt><code>write(2)</code></dt>
+          <dt>
+            <code>write(2)</code>
+          </dt>
           <dd>
             Windows:
             <a
@@ -672,7 +705,8 @@ export default function IocpLinks(request) {
 
             <p>
               Solaris's event completion ports has true in-kernel async writes
-              with <a
+              with{" "}
+              <a
                 href="http://download.oracle.com/docs/cd/E19253-01/816-5171/aio-write-3rt/index.html"
               >
                 aio_write(3RT)
@@ -680,9 +714,11 @@ export default function IocpLinks(request) {
             </p>
           </dd>
 
-          <dt><code>read(2)</code></dt>
+          <dt>
+            <code>read(2)</code>
+          </dt>
           <dd>
-            Windows: {" "}
+            Windows:{"  "}
             <a
               href="http://msdn.microsoft.com/en-us/library/aa365468(v=VS.85).aspx"
             >
@@ -691,7 +727,8 @@ export default function IocpLinks(request) {
 
             <p>
               Solaris's event completion ports has true in-kernel async reads
-              with <a
+              with{" "}
+              <a
                 href="http://download.oracle.com/docs/cd/E19253-01/816-5171/aio-read-3rt/index.html"
               >
                 aio_read(3RT)
@@ -708,7 +745,8 @@ export default function IocpLinks(request) {
           helpful and nice. In Windows the situation is worse, not only is it a
           completely different API but there are not overlapped versions to read
           and write to the TTY. Polling for readability can be accomplished by
-          waiting in another thread with <a
+          waiting in another thread with{" "}
+          <a
             href="http://msdn.microsoft.com/en-us/library/ms685061(VS.85).aspx"
           >
             <code>RegisterWaitForSingleObject()</code>
@@ -716,21 +754,21 @@ export default function IocpLinks(request) {
         </p>
 
         <dl>
-          <dt><code>read(2)</code></dt>
+          <dt>
+            <code>read(2)</code>
+          </dt>
           <dd>
             <a
               href="http://msdn.microsoft.com/en-us/library/ms684958(v=VS.85).aspx"
             >
               <code>ReadConsole()</code>
-            </a>
-            {" "}
+            </a>{" "}
             and{" "}
             <a
               href="http://msdn.microsoft.com/en-us/library/ms684961(v=VS.85).aspx"
             >
               <code>ReadConsoleInput()</code>
-            </a>
-            {" "}
+            </a>{" "}
             do not support overlapped I/O and there are no overlapped
             counter-parts. One strategy to get around this is
             <pre>
@@ -740,23 +778,22 @@ export default function IocpLinks(request) {
                 RegisterWaitForSingleObject
               </a>
               {`(&tty_wait_handle, tty_handle,\n\ttty_want_poll, NULL, INFINITE, WT_EXECUTEINWAITTHREAD |\n\tWT_EXECUTEONLYONCE)`}
-            </pre>
-            {" "}
-            which will execute <code>tty_want_poll()</code>
-            {" "}
+            </pre>{" "}
+            which will execute <code>tty_want_poll()</code>{" "}
             in a different thread. You can use this to notify the calling thread
             that
             <code>ReadConsoleInput()</code> will not block.
           </dd>
 
-          <dt><code>write(2)</code></dt>
+          <dt>
+            <code>write(2)</code>
+          </dt>
           <dd>
             <a
               href="http://msdn.microsoft.com/en-us/library/ms687401(v=VS.85).aspx"
             >
               <code>WriteConsole()</code>
-            </a>
-            {" "}
+            </a>{" "}
             is also blocking but this is probably acceptable.
           </dd>
 
@@ -782,12 +819,12 @@ export default function IocpLinks(request) {
           <ul>
             <li>overlapped = non-blocking.</li>
             <li>
-              There is no overlapped <a
+              There is no overlapped{" "}
+              <a
                 href="http://msdn.microsoft.com/en-us/library/ms738518(VS.85).aspx"
               >
                 <code>GetAddrInfoEx()</code>
-              </a>
-              {" "}
+              </a>{" "}
               function. It seems Asynchronous Procedure Calls must be used
               instead.
             </li>
@@ -838,8 +875,7 @@ export default function IocpLinks(request) {
                   href="http://msdn.microsoft.com/en-us/library/aa363792(v=vs.85).aspx"
                 >
                   <code>CancelIoEx()</code>
-                </a>
-                {" "}
+                </a>{" "}
                 &mdash; cancels an overlapped operation.
               </li>
             </ul>
@@ -872,8 +908,7 @@ export default function IocpLinks(request) {
                 href="http://msdn.microsoft.com/en-us/library/ms740565(v=VS.85).aspx"
               >
                 <code>TransmitFile()</code>
-              </a>
-              {" "}
+              </a>{" "}
               &mdash; an async <code>sendfile()</code> for windows.
             </li>
             <li>
@@ -881,8 +916,7 @@ export default function IocpLinks(request) {
                 href="http://msdn.microsoft.com/en-us/library/ms741565(v=VS.85).aspx"
               >
                 <code>WSADuplicateSocket()</code>
-              </a>
-              {" "}
+              </a>{" "}
               &mdash; describes how to share a socket between two processes.
             </li>
             <li id="setmaxstdio">
@@ -890,16 +924,16 @@ export default function IocpLinks(request) {
                 <code>
                   _setmaxstdio()
                 </code>
-              </a>
-              {" "}
+              </a>{" "}
               &mdash; something like setting the maximum number of file
-              decriptors and <a
+              decriptors and{" "}
+              <a
                 href="http://www.kernel.org/doc/man-pages/online/pages/man2/setrlimit.2.html"
               >
                 <code>setrlimit(3)</code>
-              </a>
-              {" "}
-              AKA <code>
+              </a>{" "}
+              AKA{" "}
+              <code>
                 ulimit -n
               </code>. Note the file descriptor limit on windows is 2048.
             </li>
@@ -919,11 +953,12 @@ export default function IocpLinks(request) {
             <li>
               <a href="http://msdn.microsoft.com/en-us/library/ms682016">
                 <code>DNSQuery()</code>
-              </a>
-              {" "}
-              &mdash; General purpose DNS query function like <code>
+              </a>{" "}
+              &mdash; General purpose DNS query function like{" "}
+              <code>
                 res_query()
-              </code> on Unix.
+              </code>{" "}
+              on Unix.
             </li>
           </ul>
         </p>
@@ -949,8 +984,7 @@ export default function IocpLinks(request) {
               href="http://msdn.microsoft.com/en-us/library/aa365144(v=VS.85).aspx"
             >
               <code>CallNamedPipe</code>
-            </a>
-            {" "}
+            </a>{" "}
             &mdash; like <code>accept</code> is for Unix pipes.
           </li>
           <li>
@@ -962,8 +996,7 @@ export default function IocpLinks(request) {
           </li>
         </ul>
 
-        <code>WaitForMultipleObjectsEx</code>
-        {" "}
+        <code>WaitForMultipleObjectsEx</code>{" "}
         is pronounced "wait for multiple object sex".
 
         Also useful:{" "}

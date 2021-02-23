@@ -32,7 +32,8 @@ export default async function homePage(request) {
       <a className="text-3xl" href="/">🔥 Issues</a>
       <Search />
       <h6>
-        The most discussed issues of <a
+        The most discussed issues of{" "}
+        <a
           className="text-blue-400"
           href={"https://github.com/" + repository}
         >

@@ -26,22 +26,23 @@ export default function Rant(request) {
           beautiful idea. This is not however what we interact with. The
           complexity was not contained. Instead I deal with DBus and /usr/lib
           and Boost and ioctls and SMF and signals and volatile variables and
-          prototypal inheritance and {" "}
-          <code>_C99_FEATURES_</code> and dpkg and autoconf.
+          prototypal inheritance and{"  "}<code>_C99_FEATURES_</code>{" "}
+          and dpkg and autoconf.
         </p>
 
         <p>
           Those of us who build on top of these systems are adding to the
-          complexity. Not only do you have to understand {" "}
-          <code>$LD_LIBRARY_PATH</code>
-          {" "}
-          to make your system work but now you have to understand <code>
+          complexity. Not only do you have to understand{"  "}
+          <code>
+            $LD_LIBRARY_PATH
+          </code>{" "}
+          to make your system work but now you have to understand{" "}
+          <code>
             $NODE_PATH
-          </code>
-          {" "}
+          </code>{" "}
           too - there's my little addition to the complexity you must now know!
           The users - the one who just want to see a webpage - don't care. They
-          don't care how we organize {" "}
+          don't care how we organize{"  "}
           <code>
             /usr
           </code>, they don't care about zombie processes, they don't care about
